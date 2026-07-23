@@ -25,7 +25,12 @@ jobs:
         run: |
           for file in notes/*.md
           do
-            pandoc "$file" -o "${file%.md}.html"
+            pandoc \
+            --standalone \
+            --css=../style.css \
+            --metadata title="$(basename "${file%.md}")" \
+            "$file" \
+            -o "${file%.md}.html"
           done
 
       - name: Commit generated HTML
