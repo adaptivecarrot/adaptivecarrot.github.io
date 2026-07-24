@@ -33,6 +33,22 @@ jobs:
             -o "${file%.md}.html"
           done
 
+      - name: Wrap content in main element
+        run: |
+          for file in notes/*.html
+          do
+            python3 << 'EOF'
+            import re
+            with open("$file", "r") as f:
+              content = f.read()
+            # Wrap body content in <main>
+            content = re.sub(r'(<body>)', r'\1\n<main>', content)
+            content = re.sub(r'(</body>)', r'</main>\n\1', content)
+            with open("$file", "w") as f:
+              f.write(content)
+            EOF
+          done
+
       - name: Commit generated HTML
         run: |
           git config user.name github-actions
