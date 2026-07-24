@@ -27,7 +27,7 @@ jobs:
           do
             pandoc \
             --standalone \
-            --css=../style.css \
+            --css=../styles.css \
             --metadata title="$(basename "${file%.md}")" \
             "$file" \
             -o "${file%.md}.html"
