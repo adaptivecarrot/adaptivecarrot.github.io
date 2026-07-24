@@ -35,19 +35,17 @@ jobs:
 
       - name: Wrap content in main element
         run: |
-          for file in notes/*.html
-          do
-            python3 << 'EOF'
-            import re
-            with open("$file", "r") as f:
-              content = f.read()
-            # Wrap body content in <main>
-            content = re.sub(r'(<body>)', r'\1\n<main>', content)
-            content = re.sub(r'(</body>)', r'</main>\n\1', content)
-            with open("$file", "w") as f:
-              f.write(content)
-            EOF
-          done
+          python3 - <<'PY'
+          import re, glob
+          for file in glob.glob("notes/*.html"):
+              with open(file, "r", encoding="utf-8") as f:
+                  content = f.read()
+              # Wrap body content in <main>
+              content = re.sub(r'(<body>)', r'\1\n<main>', content)
+              content = re.sub(r'(</body>)', r'</main>\n\1', content)
+              with open(file, "w", encoding="utf-8") as f:
+                  f.write(content)
+          PY
 
       - name: Commit generated HTML
         run: |
