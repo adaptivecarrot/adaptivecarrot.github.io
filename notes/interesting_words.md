@@ -12,3 +12,8 @@
 ### Words I do not use
 - Obviously: if it were obvious, it doesnt need to be stated.
 - Honestly: why would you ever not be honest?
+
+### Quotes of the same type
+- Do or do not there is no try
+- Stop trying to hit me and hit me
+- Do not siege Leningrad; take it immediately
